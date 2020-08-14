@@ -12,7 +12,6 @@ func _process(delta):
 	if in_process:
 		time += delta/3600
 		label.text = "Hours spent: " + str(time)
-		
 
 func compute_time():
 	# when it becomes visible, calculates time elapsed since last time and
@@ -48,6 +47,12 @@ func load_data():
 func write_data():
 	var file = File.new()
 	if file.open("text.sav", File.WRITE) != 0:
-			print("GDmeter: couldn't write time log")
+		print("GDmeter: couldn't write time log")
 	file.store_float(time)
 	file.close()
+
+func save():
+	# compute time and write (called on exit tree)
+	compute_time()
+	in_process = false
+	write_data()

@@ -17,7 +17,7 @@ func get_plugin_name():
 	return "GDmeter"
 
 func _exit_tree():
-	notepad_scene.write_data()
+	notepad_scene.save()
 	notepad_scene.free()
 
 func make_visible(visible):

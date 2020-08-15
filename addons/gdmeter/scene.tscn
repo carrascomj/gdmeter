@@ -2,24 +2,38 @@
 
 [ext_resource path="res://addons/gdmeter/notepad.gd" type="Script" id=1]
 
-[node name="PanelContainer" type="TabContainer"]
+[node name="Container" type="VBoxContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 2.0
-margin_right = -900.0
-margin_bottom = -519.0
+margin_left = 0.841858
+margin_top = 0.877541
+margin_right = -768.158
+margin_bottom = -455.122
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_constants/separation = -1
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Time_spent" type="Label" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 32.0
-margin_right = -4.0
-margin_bottom = -4.0
-text = "20.214153"
+margin_right = 255.0
+margin_bottom = 14.0
+text = "Hours spent: 42.1415"
+
+[node name="Format" type="Label" parent="."]
+margin_top = 13.0
+margin_right = 255.0
+margin_bottom = 27.0
+
+[node name="CheckButton" type="CheckButton" parent="Format"]
+margin_left = 1.88247
+margin_top = 23.24
+margin_right = 147.882
+margin_bottom = 66.24
+text = "Format"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="toggled" from="Format/CheckButton" to="." method="_on_CheckButton_toggled"]

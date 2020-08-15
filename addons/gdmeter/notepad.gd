@@ -1,17 +1,23 @@
 tool
-extends TabContainer
+extends VBoxContainer
 
 var time: float = 0
 var date
 var EDITORPLUGIN
 var in_process: bool = false
+var formatted_time: bool = false
 onready var label = $Time_spent
 
 func _process(delta):
 	# just called when visible to show update in real time
 	if in_process:
 		time += delta/3600
-		label.text = "Hours spent: " + str(time)
+		var time_f = str(time)
+		if formatted_time:
+			time_f = format_hours(time)
+		else:
+			time_f = "Hours spent: " + str(time)
+		label.text = time_f
 
 func compute_time():
 	# when it becomes visible, calculates time elapsed since last time and
@@ -27,6 +33,14 @@ func stop_process():
 
 func subs_time(t1: int, t2: int) -> float:
 	return float(t1 - t2) / 3600
+
+func format_hours(hours: float) -> String:
+	# convert to HH:MM:SS
+	var h = floor(hours)
+	var min_dec = (hours - h) * 60
+	var min_i = floor(min_dec)
+	var s = (min_dec - min_i) * 60
+	return "%02d:%02d:%02d" % [h, min_i, s]
 
 func load_data():
 	var file = File.new()
@@ -52,3 +66,6 @@ func save():
 	compute_time()
 	in_process = false
 	write_data()
+
+func _on_CheckButton_toggled(button_pressed):
+	formatted_time = button_pressed

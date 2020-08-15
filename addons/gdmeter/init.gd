@@ -41,4 +41,4 @@ func instantiate_notepad():
 	notepad_scene = NOTEPAD.instance()
 	notepad_scene.EDITORPLUGIN = self
 	notepad_scene.visible = false
-	notepad_scene.date = OS.get_datetime()
+	notepad_scene.date = OS.get_unix_time()

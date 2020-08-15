@@ -16,21 +16,17 @@ func _process(delta):
 func compute_time():
 	# when it becomes visible, calculates time elapsed since last time and
 	# turns on real time update
-	var new_date = OS.get_datetime()
+	var new_date = OS.get_unix_time()
 	time += subs_time(new_date, date)
 	date = new_date
 	in_process=true
 
 func stop_process():
 	in_process = false
-	date = OS.get_datetime()
+	date = OS.get_unix_time()
 
-func subs_time(t1, t2):
-	return (
-		float(t1["hour"]) - float(t2["hour"]) 
-		+ (float(t1["minute"]) - float(t2["minute"]))/60 
-		+ (float(t1["second"]) - float(t2["second"]))/3600
-	)
+func subs_time(t1: int, t2: int) -> float:
+	return float(t1 - t2) / 3600
 
 func load_data():
 	var file = File.new()

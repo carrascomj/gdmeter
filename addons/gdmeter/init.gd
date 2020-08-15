@@ -16,6 +16,9 @@ func has_main_screen():
 func get_plugin_name():
 	return "GDmeter"
 
+func get_plugin_icon():
+	return preload("res://addons/gdmeter/gdmeter_main_screen_icon.svg")
+
 func _exit_tree():
 	notepad_scene.save()
 	notepad_scene.free()

@@ -23,15 +23,16 @@ func compute_time():
 	# when it becomes visible, calculates time elapsed since last time and
 	# turns on real time update
 	var new_date = OS.get_unix_time()
-	time += subs_time(new_date, date)
+	time += subs_hours(new_date, date)
 	date = new_date
 	in_process=true
 
 func stop_process():
+	if in_process:
+		date = OS.get_unix_time()
 	in_process = false
-	date = OS.get_unix_time()
 
-func subs_time(t1: int, t2: int) -> float:
+func subs_hours(t1: int, t2: int) -> float:
 	return float(t1 - t2) / 3600
 
 func format_hours(hours: float) -> String:
